@@ -74,12 +74,13 @@ class PokemonAir(Pokemon):
     def __init__(self, ID, pokemon_name, weapon_type, health_points, defense_rating, attack_rating):
         super().__init__(ID, pokemon_name, weapon_type, health_points, defense_rating, attack_rating)
     
-    def fight_defense(self, atack_points, random):                      #Cambio en la funcion de defensa
-        if random.random(0,1) >= 0.5:
+    def fight_defense(self, damage):  
+        random = randint(0,100)                    #Cambio en la funcion de defensa
+        if random > 50:
            damage = 0
         else:
-            if self.defense_ratin > damage:
-                return False
+            if self.defense_rating > damage:
+                damage = 0
             else:
                 self.health_points -= damage - self.defense_rating
                 print(f"El pokemon {self.pokemon_name} ha bajado la vida hasta {self.health_points}")
