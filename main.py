@@ -32,7 +32,8 @@ This Python method contains the application of the Game.
 
 # Source packages.
 
-
+import csv
+from pokemon import Pokemon
 
 def get_data_from_user(name_file):
     """Function to obtain data from each user.
@@ -57,6 +58,13 @@ def get_data_from_user(name_file):
       >>> list_pokemons = get_data_from_user("file.csv")
     """
 
+    list_pokemon = []
+    with open(name_file, "r") as file:
+        reader = csv.reader(file)
+        for line in reader:
+            list = Pokemon(int(line[0]), int(line[1]), int(line[2]), int(line[3]), int(line[4]), int(line[5]))
+            list_pokemon.append(list)
+        return list_pokemon
 
 
 def get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons):
@@ -85,6 +93,20 @@ def get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons):
        >>> get_pokemon_in_a_list_of_pokemons(1, list_of_pokemons)
     """
 
+    print(list_of_pokemons[0].pokemon_name, list_of_pokemons[1].pokemon_name, list_of_pokemons[2].pokemon_name)
+    elegir_pokemon = input(f"{coach_to_ask} elige un Pokemon: ")
+
+    for contador, i in enumerate(list_of_pokemons):
+        if elegir_pokemon == i.pokemon_name:
+            print(f"{coach_to_ask} ha elegido a {list_of_pokemons[0].pokemon_name}")
+            return list_of_pokemons[contador] 
+        else:
+            contador = contador + 1
+            if contador > len(list_of_pokemons):
+                print("No ha seleccionado ningun Pokemon")
+                print(get_pokemon_in_a_list_of_pokemons(coach_to_ask, list_of_pokemons))
+            else: 
+                continue
 
 
 def coach_is_undefeated(list_of_pokemons):
@@ -110,7 +132,10 @@ def coach_is_undefeated(list_of_pokemons):
     -------
        >>> coach_is_undefeated(list_of_pokemons)
     """
-
+    if list_of_pokemons[0].health_points <= 0 and list_of_pokemons[1].health_points <= 0 and list_of_pokemons[2].health_points <= 0:
+        return False
+    else:
+        return True
 
 def main():
     """Function main of the module.
