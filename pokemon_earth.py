@@ -22,7 +22,7 @@ this Python class.
                   https://www.python.org/dev/peps/pep-0008/
                 Example NumPy Style Python Docstrings
                   http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html
-                doctest – Testing through documentation
+                doctest - Testing through documentation
                   https://pymotw.com/2/doctest/
 
 @copyright :  Copyright 2021 GNU AFFERO GENERAL PUBLIC.
@@ -33,9 +33,10 @@ this Python class.
 
 # Source packages.
 
+from weapon_type import WeaponType
+from pokemon import Pokemon
 
-
-class PokemonEarth():
+class PokemonEarth(Pokemon):
     """Python class to implement a basic version of a Pokemon of the game.
 
     This Python class implements the basic version of a Pokemon of the game.
@@ -69,6 +70,13 @@ class PokemonEarth():
       >>> obj_Pokemon = PokemonEarth(1, "Diglett", WeaponType.PUNCH, 100, 7, 10)
     """
 
+    #Clase para pokemon de tipo tierra
+    def __init__(self, ID, pokemon_name, weapon_type, health_points, defense_rating, attack_rating):
+        super().__init__(ID, pokemon_name, weapon_type, health_points, defense_rating, attack_rating)
+
+        if not isinstance(defense_rating, int) or not (11 <= defense_rating <= 20):
+            print("El arma del pokemon debe ser de tipo tierra (entre 11 y 20).")
+        
 
 def main():
     """Function main of the module.
