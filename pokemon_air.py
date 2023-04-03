@@ -69,6 +69,8 @@ class PokemonAir():
       >>> obj_Pokemon = PokemonEarth(1, "Pidgey", WeaponType.PUNCH, 100, 7, 10)
     """
 
+    def
+
 
 def main():
     """Function main of the module.
