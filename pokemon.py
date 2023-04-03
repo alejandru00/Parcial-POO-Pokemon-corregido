@@ -33,7 +33,7 @@ this Python class.
 
 # Source packages.
 
-
+from weapon_type import WeaponType
 
 class Pokemon():
     """Python class to implement a basic version of a Pokemon of the game.
@@ -69,9 +69,98 @@ class Pokemon():
       >>> obj_Pokemon = Pokemon(1, "Bulbasaur", WeaponType.PUNCH, 100, 7, 10)
     """
 
+    id = []
+    max_health_points = 100
+    min_health_points = 1
+    max_attack_rating = 10
+    min_attack_rating  = 1
+    max_defense_rating = 10
+    min_defense_rating = 1
 
+    def __init__(self, ID, pokemon_name, weapon_type, health_points, attack_rating, defense_rating):
 
+        if not isinstance(health_points, int) or not (self.min_health_points <= health_points <= self.max_health_points):
+            print("La salud del pokemon debe ser un entero entre 1 y 100.")
+        if not isinstance(attack_rating, int) or not (self.min_attack_rating <= attack_rating <= self.max_attack_rating):
+            print("El ataque del pokemon debe ser un entero entre 1 y 10.")
+        if not isinstance(defense_rating, int) or not (self.min_defense_rating <= defense_rating <= self.max_defense_rating):
+            print("La defensa del pokemon debe ser un entero entre 1 y 10.")
+        if ID in Pokemon.id:
+            print("El ID del pokemon debe ser unico.")
+        
+        self.ID = ID
+        self.pokemon_name = pokemon_name
+        self.weapon_type = weapon_type
+        self.health_points = health_points
+        self.attack_rating = attack_rating
+        self.defense_rating = defense_rating
+        Pokemon.id.append(ID)
+    
 
+    #Destructor
+    def __del__(self):
+        print(f"El pokemon {self.pokemon_name} ha sido eliminado.")
+
+    #Printear datos
+    def __str__(self):              
+        return f"Pokemon ID {self.ID} with name {self.pokemon_name} has as weapon {self.weapon_type.name} and health {self.health_points}"
+    
+    #def getter y setter
+    def get_ID(self):               
+        return self.ID
+    
+    def get_pokemon_name(self):
+        return self.pokemon_name
+    
+    def get_weapon_type(self):
+        return self.weapon_type
+    
+    def get_health_points(self):
+        return self.health_points
+    
+    def set_health_points(self, health_points):
+        if health_points >= 0 and health_points <= 100:
+            self.health_points = health_points
+        else:
+            print("No se puede cambiar la salud.")
+    
+    def get_attack_rating(self):
+        return self.attack_rating
+    
+    def set_attack_rating(self, attack_rating):
+        if attack_rating >= 1 and attack_rating <= 10:
+            self.attack_rating = attack_rating
+        else:
+            print("No se puede cambiar el ataque.")
+    
+    def get_defense_rating(self):
+        return self.defense_rating
+    
+    def set_defense_rating(self, defense_rating):
+        if defense_rating >= 1 and defense_rating <= 10:
+            self.defense_rating = defense_rating
+        else:
+            print("No se puede cambiar la defensa.")
+
+    #Comprobar si el pokemon esta vivo
+    def is_alive(self):      
+        if self.health_points > 0:
+            return True
+        else:
+            return False
+
+    #Defensa de un pokemon
+    def fight_defense(self, damage):
+        if self.defense_rating > damage:
+            return False
+        
+        else:
+            self.health_points -= damage - self.defense_rating
+            print(f"le has quitado {self.health_points} puntos de salud al pokemon {self.pokemon_name}.")
+            return True
+    #Atacar a otro pokemon
+    def fight_attack(self, pokemon):      
+        return pokemon.fight_defense(self.attack_rating)
 
 def main():
     """Function main of the module.
