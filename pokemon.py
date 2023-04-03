@@ -156,7 +156,7 @@ class Pokemon():
         
         else:
             self.health_points -= damage - self.defense_rating
-            print(f"le has quitado {self.health_points} puntos de salud al pokemon {self.pokemon_name}.")
+            print(f"El pokemon {self.pokemon_name} tiene ahora {self.health_points} puntos de salud.")
             return True
     #Atacar a otro pokemon
     def fight_attack(self, pokemon):      
